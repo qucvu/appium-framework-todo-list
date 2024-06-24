@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.testng', name: 'testng', version: '7.10.2'
+    implementation group: 'io.appium', name: 'java-client', version: '9.2.3'
+    implementation group: 'net.datafaker', name: 'datafaker', version: '2.2.2'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.16.1'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.21.0'
+}
+
+test {
+    useTestNG(){
+//        suite 'src/test/resources/runTodoList.xml'
+        useDefaultListeners = true
+        outputDirectory = file("$buildDir/testng-reports")
+    }
+    testLogging {
+        showStandardStreams = true //show log in console
+    }
+    systemProperty("file.encoding", "utf-8")
+    reports {
+        html.destination = file("$buildDir/testng-reports/reportHTML")
+    }
+
+}
